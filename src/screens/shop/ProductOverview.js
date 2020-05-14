@@ -4,6 +4,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import RequestAPIService from '../../services/';
 import {connect} from 'react-redux';
 import * as productAction from '../../actions/ProductAction';
+import ProductItem from '../../components/ProductItem';
 
 class ProductOverview extends Component {
   constructor(props) {
@@ -30,17 +31,28 @@ class ProductOverview extends Component {
     );
   }
   render() {
+    const {navigation} = this.props;
     return this.state.isLoading ? (
       <ActivityIndicator />
     ) : (
-      <View style={{flex: 1}}>
-        <Text>Product Overview</Text>
-        <FlatList
-          data={this.props.availableProduct}
-          keyExtractor={(item) => item.id}
-          renderItem={({item}) => <Text>{item.description}</Text>}
-        />
-      </View>
+      <FlatList
+        data={this.props.availableProduct}
+        keyExtractor={(item) => item.id}
+        renderItem={({item}) => (
+          <ProductItem
+            image={item.imageUrl}
+            title={item.title}
+            price={item.price}
+            onClickViewDetails={() => {
+              navigation.navigate('ProductDetails', {
+                productId: item.id,
+                productTitle: item.title,
+              });
+            }}
+            onClickAddToCard={() => {}}
+          />
+        )}
+      />
     );
   }
 }
