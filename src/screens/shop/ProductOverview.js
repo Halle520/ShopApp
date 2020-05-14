@@ -1,17 +1,16 @@
 import React, {Component} from 'react';
-import {Text, View, ActivityIndicator} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import RequestAPIService from '../../services/';
 import {connect} from 'react-redux';
 import * as productAction from '../../actions/ProductAction';
+import * as cartAction from '../../actions/CartAction';
 import ProductItem from '../../components/ProductItem';
 
 class ProductOverview extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      listProduct: [],
       isLoading: true,
     };
   }
@@ -49,7 +48,9 @@ class ProductOverview extends Component {
                 productTitle: item.title,
               });
             }}
-            onClickAddToCard={() => {}}
+            onClickAddToCard={() => {
+              this.props.addToCart(item);
+            }}
           />
         )}
       />
@@ -59,5 +60,9 @@ class ProductOverview extends Component {
 const mapStateToProps = (state) => ({
   availableProduct: state.products.availableProduct,
 });
+const mapDispatchToProps = {
+  ...cartAction,
+  ...productAction,
+};
 
-export default connect(mapStateToProps, productAction)(ProductOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductOverview);

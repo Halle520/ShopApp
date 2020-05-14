@@ -12,7 +12,7 @@ export default (state = productState, action) => {
         state.availableProduct.push(element);
       });
 
-      return state;
+      return {...state};
     default:
       return state;
   }
