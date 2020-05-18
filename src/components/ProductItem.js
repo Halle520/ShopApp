@@ -10,8 +10,8 @@ import {
 import Colors from '../constants/Colors';
 const ProductItem = (props) => {
   return (
-    <TouchableOpacity onPress={props.onClickViewDetails}>
-      <View style={styles.product}>
+    <View style={styles.product}>
+      <TouchableOpacity onPress={props.onClickViewDetails}>
         <View style={styles.imageContainer}>
           <Image style={styles.imageProduct} source={{uri: props.image}} />
         </View>
@@ -31,8 +31,8 @@ const ProductItem = (props) => {
             onPress={props.onClickAddToCard}
           />
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 

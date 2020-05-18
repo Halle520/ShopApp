@@ -8,7 +8,6 @@ const cartState = {
 export default (state = cartState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
-      console.log(state.itemInCart);
       const addedProduct = action.product;
       const productPrice = Number(addedProduct.price);
       const productTitle = addedProduct.title;
@@ -28,7 +27,6 @@ export default (state = cartState, action) => {
           productPrice,
         );
       }
-
       return {
         ...state,
         itemInCart: {...state.itemInCart, [addedProduct.id]: itemChangeInCart},
